@@ -24,30 +24,30 @@ public:
   ~RunningAverage();
 
   void     clear();
-  void     add(const float value)    { addValue(value); };
-  void     addValue(const float value);
-  void     fillValue(const float value, const uint16_t number);
-  float    getValue(const uint16_t position);
+  void     add(const uint16_t value)    { addValue(value); };
+  void     addValue(const uint16_t value);
+  void     fillValue(const uint16_t value, const uint16_t number);
+  uint16_t    getValue(const uint16_t position);
 
-  float    getAverage();            //  iterates over all elements.
-  float    getFastAverage() const;  //  reuses previous calculated values.
+  uint16_t    getAverage();            //  iterates over all elements.
+  uint16_t    getFastAverage() const;  //  reuses previous calculated values.
 
   //  return statistical characteristics of the running average
-  float    getStandardDeviation() const;
-  float    getStandardError() const;
+  uint16_t    getStandardDeviation() const;
+  uint16_t    getStandardError() const;
 
   //  returns min/max added to the data-set since last clear
-  float    getMin() const { return _min; };
-  float    getMax() const { return _max; };
+  uint16_t    getMin() const { return _min; };
+  uint16_t    getMax() const { return _max; };
 
   //  returns min/max from the values in the internal buffer
-  float    getMinInBuffer() const;
-  float    getMaxInBuffer() const;
+  uint16_t    getMinInBuffer() const;
+  uint16_t    getMaxInBuffer() const;
 
   //  return true if buffer is full
   bool     bufferIsFull() const { return _count == _size; };
 
-  float    getElement(uint16_t index) const;
+  uint16_t    getElement(uint16_t index) const;
 
   uint16_t getSize() const { return _size; }
   uint16_t getCount() const { return _count; }
@@ -59,9 +59,9 @@ public:
 
 
   //  get some stats from the last count additions.
-  float    getAverageLast(uint16_t count);
-  float    getMinInBufferLast(uint16_t count);
-  float    getMaxInBufferLast(uint16_t count);
+  uint16_t    getAverageLast(uint16_t count);
+  uint16_t    getMinInBufferLast(uint16_t count);
+  uint16_t    getMaxInBufferLast(uint16_t count);
 
   //       Experimental 0.4.3
   float    getAverageSubset(uint16_t start, uint16_t count);
@@ -72,10 +72,10 @@ protected:
   uint16_t _count;
   uint16_t _index;
   uint16_t _partial;
-  float    _sum;
-  float*   _array;
-  float    _min;
-  float    _max;
+  uint16_t    _sum;
+  uint16_t*   _array;
+  uint16_t    _min;
+  uint16_t    _max;
 };
 
 

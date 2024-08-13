@@ -34,18 +34,18 @@ void RunningAverage::clear()
 {
   _count = 0;
   _index = 0;
-  _sum = 0.0;
-  _min = NAN;
-  _max = NAN;
+  _sum = 0;
+  _min = 0;
+  _max = 0;
   for (uint16_t i = _size; i > 0; )
   {
-    _array[--i] = 0.0;  //  keeps addValue simpler
+    _array[--i] = 0;  //  keeps addValue simpler
   }
 }
 
 
 //  adds a new value to the data-set
-void RunningAverage::addValue(const float value)
+void RunningAverage::addValue(const uint16_t value)
 {
   if (_array == NULL)
   {
@@ -70,7 +70,7 @@ void RunningAverage::addValue(const float value)
 
 
 //  returns the average of the data-set added so far, NAN if no elements.
-float RunningAverage::getAverage()
+uint16_t RunningAverage::getAverage()
 {
   if (_count == 0)
   {
@@ -88,11 +88,11 @@ float RunningAverage::getAverage()
 
 //  the larger the size of the internal buffer 
 //  the greater the gain wrt getAverage()
-float RunningAverage::getFastAverage() const
+uint16_t RunningAverage::getFastAverage() const
 {
   if (_count == 0)
   {
-    return NAN;
+    return 0;
   }
 
   return _sum / _count;   //  multiplication is faster ==> extra admin
@@ -100,14 +100,14 @@ float RunningAverage::getFastAverage() const
 
 
 //  returns the minimum value in the buffer
-float RunningAverage::getMinInBuffer() const
+uint16_t RunningAverage::getMinInBuffer() const
 {
   if (_count == 0)
   {
-    return NAN;
+    return 0;
   }
 
-  float _min = _array[0];
+  uint16_t _min = _array[0];
   for (uint16_t i = 1; i < _count; i++)
   {
     if (_array[i] < _min) _min = _array[i];
@@ -117,14 +117,14 @@ float RunningAverage::getMinInBuffer() const
 
 
 //  returns the maximum value in the buffer
-float RunningAverage::getMaxInBuffer() const
+uint16_t RunningAverage::getMaxInBuffer() const
 {
   if (_count == 0)
   {
-    return NAN;
+    return 0;
   }
 
-  float _max = _array[0];
+  uint16_t _max = _array[0];
   for (uint16_t i = 1; i < _count; i++)
   {
     if (_array[i] > _max) _max = _array[i];
@@ -134,11 +134,11 @@ float RunningAverage::getMaxInBuffer() const
 
 
 //  returns the value of an element if exist, NAN otherwise
-float RunningAverage::getElement(uint16_t index) const
+uint16_t RunningAverage::getElement(uint16_t index) const
 {
   if (_count == 0)
   {
-    return NAN;
+    return 0;
   }
 
   return _array[index];
@@ -225,11 +225,11 @@ float RunningAverage::getValue(const uint16_t position)
 {
   if (_count == 0)
   {
-    return NAN;
+    return 0;
   }
   if (position >= _count)
   {
-    return NAN;  // cannot ask more than is added
+    return 0;  // cannot ask more than is added
   }
 
   uint16_t _pos = position + _index;
@@ -323,7 +323,4 @@ float RunningAverage::getAverageSubset(uint16_t start, uint16_t count)
   }
   return sum / cnt;
 }
-
-
-//  -- END OF FILE --
 
